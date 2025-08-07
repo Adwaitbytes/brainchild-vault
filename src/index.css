@@ -2,41 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Re:Mind Design System - Decentralized AI Memory Vault
+Aesthetic: Clean, minimal with light pastels like Notion + Linear + Apple Notes
+Colors: Lavender, baby blue, soft whites, gentle gradients
+Typography: Clean Inter font with excellent hierarchy
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Background & Text */
+    --background: 240 15% 98%;
+    --foreground: 240 15% 15%;
 
+    /* Card System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 240 15% 15%;
 
+    /* Popover System */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 240 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary Brand - Soft Lavender */
+    --primary: 262 50% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 262 60% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Baby Blue Accent */
+    --accent-blue: 210 80% 88%;
+    --accent-blue-dark: 210 50% 65%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Secondary - Soft Gray */
+    --secondary: 240 20% 95%;
+    --secondary-foreground: 240 15% 25%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted Elements */
+    --muted: 240 15% 96%;
+    --muted-foreground: 240 10% 50%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Accent System */
+    --accent: 240 15% 94%;
+    --accent-foreground: 240 15% 20%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* States */
+    --destructive: 350 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 70% 55%;
+    --warning: 38 92% 50%;
 
-    --radius: 0.5rem;
+    /* Borders & Inputs */
+    --border: 240 20% 90%;
+    --input: 240 20% 92%;
+    --ring: 262 50% 68%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-blue: linear-gradient(135deg, hsl(var(--accent-blue)), hsl(var(--accent-blue-dark)));
+    --gradient-soft: linear-gradient(180deg, hsl(var(--background)), hsl(var(--secondary)));
+
+    /* Shadows */
+    --shadow-soft: 0 2px 20px -5px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+
+    /* Radius */
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +130,62 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Custom animations for Re:Mind */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary-glow) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary-glow) / 0.6); }
+  }
+
+  @keyframes flow {
+    0% { transform: translateX(-100%) scale(0.8); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(100%) scale(1.2); opacity: 0; }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-flow {
+    animation: flow 4s ease-in-out infinite;
+  }
+
+  /* Memory blocks with gentle shadows */
+  .memory-block {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .memory-block:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .bg-gradient-blue {
+    background: var(--gradient-blue);
+  }
+
+  .bg-gradient-soft {
+    background: var(--gradient-soft);
   }
 }
